@@ -1,0 +1,17 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+ 
+.card-item {
+    flex: 0 0 25rem;
+    box-sizing: border-box;
+    margin: 1rem 0.25em;
+    border-radius: 10px;
+    border: 1px solid;
+}
+
+.card-image {
+    border-radius: 10px;
+}
