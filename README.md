@@ -25,7 +25,7 @@ Fluxo
 
 - Banco de Dados (`Sqlite3`)
   
-  
+
 Vídeo de como configurar Projeto: 
 
 Repositório: `https://github.com/djangomy/config-default-simple.git`
@@ -42,7 +42,7 @@ Pack de imagens q vou utilizar no vídeo.
 
 Vamos lá.
  
-<details><summary><b>aaaaaaaaaaaaa</b></summary>
+<details><summary><b>Criar Modelo</b></summary>
 
 - **Criar Modelo**
     
@@ -138,7 +138,7 @@ Vamos lá.
 
 </details>
 
-<details><summary><b>aaaaaaaaaaaaa</b></summary>
+<details><summary><b>Listar Imóveis</b></summary>
 
 - **Listar Imóveis**
     
@@ -256,7 +256,7 @@ Vamos lá.
 
 </details>
 
-<details><summary><b>aaaaaaaaaaaaa</b></summary>
+<details><summary><b>Formulário Cliente</b></summary>
 
 - **Formulário Cliente**
     
@@ -334,7 +334,7 @@ Vamos lá.
 
 </details>
 
-<details><summary><b>aaaaaaaaaaaaa</b></summary>
+<details><summary><b>Formulário Imóvel</b></summary>
 
 - **Formulário Imóvel**
     
@@ -427,7 +427,7 @@ Vamos lá.
 
 </details>
 
-<details><summary><b>aaaaaaaaaaaaa</b></summary>
+<details><summary><b>Formulário Registro de Locação</b></summary>
 
 - **Formulário Registro de Locação**
     
@@ -558,7 +558,7 @@ Vamos lá.
 
 </details>
 
-<details><summary><b>aaaaaaaaaaaaa</b></summary>
+<details><summary><b>Navbar</b></summary>
 
 - **Navbar**
     
@@ -616,7 +616,7 @@ Vamos lá.
 
 </details>
 
-<details><summary><b>aaaaaaaaaaaaa</b></summary>
+<details><summary><b>Message</b></summary>
 
 - **Message**
     
@@ -649,7 +649,7 @@ Vamos lá.
 
 </details>
 
-<details><summary><b>aaaaaaaaaaaaa</b></summary>
+<details><summary><b>Relatório Simples</b></summary>
 
 - **Relatório Simples**
     
@@ -778,7 +778,7 @@ Vamos lá.
 
 </details>
 
-<details><summary><b>aaaaaaaaaaaaa</b></summary>
+<details><summary><b>Filtros</b></summary>
 
 - **Filtros**
  
