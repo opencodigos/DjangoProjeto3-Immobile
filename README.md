@@ -1,13 +1,13 @@
 # Freela do Workana
 # Controle de Aluguéis
 
-![w2.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0fc9d78c-e347-420c-a0d7-579531079871/w2.png)
+![w2.png](https://raw.githubusercontent.com/djangomy/immobile/main/w2.png)
 
 Desenvolver um sistema que permita o controle de aluguéis de imóveis em uma imobiliária.
 
 Fluxo
 
-![core.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e7082e29-85a8-48bc-8704-a1872bda3f6f/core.png)
+![core.png](https://raw.githubusercontent.com/djangomy/immobile/main/core.png)
 
 - Cadastro de imóveis:  `Código, Tipo, endereço e Valor`
 
