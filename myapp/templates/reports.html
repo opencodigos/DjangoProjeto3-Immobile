@@ -3,110 +3,122 @@
 {% block title %}Relatório{% endblock %}
 
 {% block content %}
+<div class="container mt-4">
 
-<div class="container"> 
+    <!-- Filtros -->
+    <div class="row g-3 align-items-center bg-light p-4 rounded shadow mb-4">
 
-    <div class="row g-3 align-items-center m-3 bg-light p-3"> 
-
-        <!-- Pesquisar pelo nome ou e-mail do cliente -->
-        <div class="col-auto">  
-            <label>Nome do Cliente ou E-mail</label>
+        <!-- Pesquisar pelo cliente -->
+        <div class="col-md-3">
+            <label for="clientSearch" class="form-label">Nome do Cliente ou E-mail</label>
             <form class="d-flex" action="{% url 'reports' %}">
-                <input name="client" type="search" class="form-control me-2" placeholder="Pesquisar por cliente..." aria-label="Search">
-                <button class="btn btn-success" type="submit"><i class="fas fa-search"></i></button>
-            </form> 
+                <input name="client" id="clientSearch" type="search" class="form-control me-2" 
+                       placeholder="Pesquisar cliente..." value="{{ request.GET.client }}">
+                <button class="btn btn-success" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
         </div>
 
-        <!-- Filter por Intervalo de data -->
-        <div class="col-auto">  
-            <form class="d-flex align-items-end" action="{% url 'reports' %}"> 
-                <div class="">
-                    <label for="">Inicio</label>
-                    <input name="dt_start" type="date" value="{{request.GET.dt_start}}" class="form-control me-2"> 
+        <!-- Filtro de data -->
+        <div class="col-md-4">
+            <label class="form-label">Intervalo de Datas</label>
+            <form class="d-flex align-items-end gap-2" action="{% url 'reports' %}">
+                <div>
+                    <input name="dt_start" type="date" value="{{ request.GET.dt_start }}" class="form-control">
+                </div> 
+                <div>
+                    <input name="dt_end" type="date" value="{{ request.GET.dt_end }}" class="form-control">
                 </div>
-                <div class="">
-                    <label for="">Final</label>
-                    <input name="dt_end" type="date" value="{{request.GET.dt_end}}" class="form-control me-2"> 
-                </div>
-                <div class="">
-                    <button class="btn btn-outline-dark" type="submit"><i class="fas fa-filter"></i></button> 
-                </div>
-            </form> 
+                <button class="btn btn-outline-dark" type="submit">
+                    <i class="fas fa-filter"></i>
+                </button>
+            </form>
         </div>
 
-
-        <!-- Filtrar pelo status do imóvel se está locado ou não locado -->
-        <div class="col-auto">
+        <!-- Filtro de status -->
+        <div class="col-md-2">
+            <label for="statusFilter" class="form-label">Status Locação</label>
             <form action="{% url 'reports' %}">
-                <label>Status Locação</label>
-                <select name="is_locate" class="form-select" onchange="this.form.submit()">
-                    <option></option> 
-                    <option value="True" {% if request.GET.is_locate == 'True' %}selected{% endif %}>LOCADO</option>
-                    <option value="False" {% if request.GET.is_locate == 'False' %}selected{% endif %}>NÃO LOCADO</option> 
+                <select name="is_locate" id="statusFilter" class="form-select" onchange="this.form.submit()">
+                    <option value="">Todos</option>
+                    <option value="True" {% if request.GET.is_locate == 'True' %}selected{% endif %}>Locado</option>
+                    <option value="False" {% if request.GET.is_locate == 'False' %}selected{% endif %}>Não Locado</option>
                 </select>
             </form>
         </div>
 
-        <!-- Filter pelo tipo de imóvel -->
-        <div class="col-auto">
-            <form class="" action="{% url 'reports' %}">
-            <label>Tipo de Imóvel</label>
-                <select name="type_item" class="form-select" onchange="this.form.submit()">
-                    <option></option> 
-                    <option value="APARTAMENTO" {% if request.GET.type_item == 'APARTAMENTO' %}selected{% endif %}>APARTAMENTO</option>
-                    <option value="KITNET" {% if request.GET.type_item == 'KITNET' %}selected{% endif %}>KITNET</option>
-                    <option value="CASA" {% if request.GET.type_item == 'CASA' %}selected{% endif %}>CASA</option>
+        <!-- Filtro de tipo -->
+        <div class="col-md-2">
+            <label for="typeFilter" class="form-label">Tipo de Imóvel</label>
+            <form action="{% url 'reports' %}">
+                <select name="type_item" id="typeFilter" class="form-select" onchange="this.form.submit()">
+                    <option value="">Todos</option>
+                    <option value="APARTAMENTO" {% if request.GET.type_item == 'APARTAMENTO' %}selected{% endif %}>Apartamento</option>
+                    <option value="KITNET" {% if request.GET.type_item == 'KITNET' %}selected{% endif %}>Kitnet</option>
+                    <option value="CASA" {% if request.GET.type_item == 'CASA' %}selected{% endif %}>Casa</option>
                 </select>
-            </form> 
+            </form>
         </div>
-    
-        <!-- Resetar estado dos filtros -->
-        <div class="col-auto"> 
-            <a class="btn btn-danger" href="{% url 'reports' %}"><i class="fas fa-window-close"></i></a>
+
+        <!-- Resetar filtros -->
+        <div class="col-md-1">
+            <label for="idReset" class="form-label">Resetar</label>
+            <a class="btn btn-danger" href="{% url 'reports' %}">
+                <i class="fas fa-window-close"></i>
+            </a> 
         </div>  
-        
     </div>
 
+    <!-- Tabela -->
+    <div class="table-responsive">
+        <table class="table table-striped table-hover shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Registro Inicial</th>
+                    <th>Registro Final</th>
+                    <th>Cliente</th>
+                    <th>Código</th>
+                    <th>Imóvel</th>
+                    <th>Valor</th>
+                    <th>Locado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for immobile in immobiles %}
+                <tr>
+                    <td>{{ immobile.id }}</td>
+                    <td>
+                        {% for location in immobile.reg_location.all %}
+                            {{ location.dt_start|date:"d/m/Y" }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for location in immobile.reg_location.all %}
+                            {{ location.dt_end|date:"d/m/Y" }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for location in immobile.reg_location.all %}
+                            {{ location.client }}
+                        {% endfor %}
+                    </td>
+                    <td>{{ immobile.code }}</td>
+                    <td>{{ immobile.type_item }}</td>
+                    <td>R$ {{ immobile.price }}</td>
+                    <td>
+                        {% if immobile.is_locate %}
+                            <i class="fas fa-check-circle text-success fa-2x"></i>
+                        {% else %}
+                            <i class="fas fa-minus-circle text-danger fa-2x"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    <!-- Tabela com todas informações de Registro de Locação -->
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Registro Inicial</th>
-                <th scope="col">Registro Final</th>
-                <th scope="col">Cliente</th>
-                <th scope="col">Codigo</th>
-                <th scope="col">Imovel</th>
-                <th scope="col">Valor</th>
-                <th scope="col">Locado</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for immobile in immobiles %}
-            <tr>
-                <td scope="row">{{immobile.id}}</td>
-
-                <td scope="row">{% for location in immobile.reg_location.all %}{{location.dt_start|date:"d/m/Y"}}{% endfor %}</td>
-                <td scope="row">{% for location in immobile.reg_location.all %}{{location.dt_end|date:"d/m/Y"}}{% endfor %}</td>
-                <td scope="row">{% for location in immobile.reg_location.all %}{{location.client}}{% endfor %}</td>
-
-                <td scope="row">{{immobile.code}}</td>
-                <td scope="row">{{immobile.type_item}}</td>
-                <td scope="row">R$ {{immobile.price}}</td>
-
-                <td scope="row">
-                    {% if immobile.is_locate == True %}
-                    <i class="fas fa-check-circle fa-2x link-success"></i>
-                    {% else %}
-                    <i class="fas fa-minus-circle fa-2x link-danger"></i>
-                    {% endif %} 
-                </td>
-
-            </tr>  
-            {% endfor %}
-        </tbody>
-    </table> 
 </div>
-
 {% endblock %}

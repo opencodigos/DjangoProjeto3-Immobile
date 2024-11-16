@@ -1,6 +1,6 @@
 from django.db import models
-from datetime import datetime
-# Create your models here.
+from datetime import datetime 
+
 
 ## Cadastro de Clientes     
 class Client(models.Model):
@@ -21,8 +21,7 @@ class Client(models.Model):
 class TypeImmobile(models.TextChoices):
     APARTMENT = 'APARTAMENTO','APARTAMENTO'
     KITNET = 'KITNET','KITNET'
-    HOUSE = 'CASA','CASA'
-
+    HOUSE = 'CASA','CASA' 
 
 
 ## Cadastro de Imóveis
@@ -32,8 +31,7 @@ class Immobile(models.Model):
     address = models.TextField()
     price = models.DecimalField(max_digits=10,decimal_places=2)
     is_locate = models.BooleanField(default=False)
-    
-    
+
     def __str__(self):
         return "{} - {}".format(self.code, self.type_item)
     
@@ -49,8 +47,7 @@ class ImmobileImage(models.Model):
     immobile = models.ForeignKey(Immobile, related_name='immobile_images', on_delete=models.CASCADE)
  
     def __str__(self):
-        return self.immobile.code
-
+        return self.immobile.code 
 
 
 ## Registrar Locação

@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
-
 from django.db.models import Q
-
 from .forms import ClientForm, ImmobileForm, RegisterLocationForm
 from .models import Immobile, ImmobileImage
+
 
 # Create your views here.
 def list_location(request):
@@ -38,10 +37,8 @@ def form_immobile(request):
     return render(request, 'form-immobile.html', {'form': form})
 
 
-
 def form_location(request, id):
     get_locate = Immobile.objects.get(id=id) ## pega objeto
-
     form = RegisterLocationForm()  
     if request.method == 'POST':
         form = RegisterLocationForm(request.POST)
@@ -54,12 +51,10 @@ def form_location(request, id):
             immo = Immobile.objects.get(id=id)
             immo.is_locate = True ## passa ser True
             immo.save() 
-
             return redirect('list-location') # Retorna para lista
 
     context = {'form': form, 'location': get_locate}
     return render(request, 'form-location.html', context)
-
 
 
 ## Relatório

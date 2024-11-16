@@ -1,11 +1,9 @@
 /tmp
-passenger_wsgi.py 
 .venv 
 /static_media
-static_media
-/static_files
+static_media 
 static_files 
-mydatabase
-file_name.sql
+/static_files  
 __pycache__ 
 __pycache__/
+/__pycache__/

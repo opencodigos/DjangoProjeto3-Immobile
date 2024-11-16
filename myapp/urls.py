@@ -10,6 +10,5 @@ urlpatterns = [
 
     path('form-location/<int:id>/', views.form_location, name='location-create'), 
 
-    path('reports/', views.reports, name='reports'),
-
+    path('reports/', views.reports, name='reports'), 
 ]
